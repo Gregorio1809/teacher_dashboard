@@ -30,14 +30,15 @@ const dashboardData = {
 let performanceChart, completionChart, trendChart, engagementChart;
 
 // Update statistics
+// FIX THIS JS FUNCTION
 function updateStats() {
     document.getElementById('totalStudents').textContent = dashboardData.totalStudents;
     document.getElementById('activeAssignments').textContent = dashboardData.activeAssignments;
-    document.getElementById('submissionRate').textContent = dashboardData.submissionRate + '%';
     document.getElementById('avgGrade').textContent = dashboardData.avgGrade;
 }
 
 // Populate recent submissions
+// FIX THIS JS FUNCTION
 function populateRecentSubmissions() {
     const container = document.getElementById('recentSubmissions');
     container.innerHTML = '';
@@ -47,7 +48,6 @@ function populateRecentSubmissions() {
         item.className = 'activity-item';
         item.innerHTML = `
             <div class="name">${submission.name}</div>
-            <div class="details">${submission.assignment} • ${submission.time}</div>
         `;
         container.appendChild(item);
     });
@@ -91,11 +91,9 @@ function initPerformanceChart() {
             datasets: [{
                 label: 'Number of Students',
                 data: [12, 15, 4, 1, 0],
+                // Fix this JS COLOR
                 backgroundColor: [
                     chartColors.success,
-                    chartColors.primary,
-                    chartColors.warning,
-                    chartColors.danger,
                     chartColors.gray
                 ],
                 borderWidth: 0,
@@ -149,15 +147,15 @@ function initPerformanceChart() {
 function initCompletionChart() {
     const ctx = document.getElementById('completionChart').getContext('2d');
     
+    // Fix this Chart
     completionChart = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: ['Completed', 'Pending', 'Late'],
             datasets: [{
                 data: [28, 3, 1],
+                // Fix this JS COLOR
                 backgroundColor: [
-                    chartColors.success,
-                    chartColors.warning,
                     chartColors.danger
                 ],
                 borderWidth: 0,
@@ -183,7 +181,8 @@ function initCompletionChart() {
                         label: function(context) {
                             const total = context.dataset.data.reduce((a, b) => a + b, 0);
                             const percentage = ((context.parsed / total) * 100).toFixed(1);
-                            return context.label + ': ' + context.parsed + ' (' + percentage + '%)';
+                            // Fix this RETURN
+                            return context.label;
                         }
                     }
                 }
@@ -201,8 +200,9 @@ function initCompletionChart() {
 function initTrendChart() {
     const ctx = document.getElementById('trendChart').getContext('2d');
     
+    // Fix this Chart
     trendChart = new Chart(ctx, {
-        type: 'line',
+        type: 'doughnut',
         data: {
             labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
             datasets: [{
@@ -255,8 +255,8 @@ function initTrendChart() {
                     }
                 }
             },
+            // Fix this JS animation
             animation: {
-                duration: 1500,
                 easing: 'easeInOutQuart'
             }
         }
@@ -267,8 +267,9 @@ function initTrendChart() {
 function initEngagementChart() {
     const ctx = document.getElementById('engagementChart').getContext('2d');
     
+    // fix this Chart
     engagementChart = new Chart(ctx, {
-        type: 'radar',
+        type: 'line',
         data: {
             labels: ['Attendance', 'Participation', 'Homework', 'Quizzes', 'Projects'],
             datasets: [{
@@ -276,10 +277,8 @@ function initEngagementChart() {
                 data: [92, 85, 88, 87, 90],
                 borderColor: chartColors.primary,
                 backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                // fix this JS datasets attributes
                 borderWidth: 2,
-                pointBackgroundColor: chartColors.primary,
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: chartColors.primary
             }]
         },
@@ -323,22 +322,20 @@ function initEngagementChart() {
 }
 
 // Initialize all charts
+// FIX THIS JS FUNCTION
 function initCharts() {
     initPerformanceChart();
-    initCompletionChart();
     initTrendChart();
     initEngagementChart();
 }
 
 // Update performance chart based on filter
+// FIX THIS JS Function
 function updatePerformanceChart(filterType) {
     if (filterType === 'subject') {
         performanceChart.data.labels = ['Math', 'Science', 'English', 'History'];
         performanceChart.data.datasets[0].data = [88, 85, 90, 82];
-        performanceChart.data.datasets[0].label = 'Average Score by Subject';
     } else {
-        performanceChart.data.labels = ['A', 'B', 'C', 'D', 'F'];
-        performanceChart.data.datasets[0].data = [12, 15, 4, 1, 0];
         performanceChart.data.datasets[0].label = 'Number of Students';
     }
     performanceChart.update();
@@ -357,10 +354,10 @@ function updateCompletionChart(filterType) {
 }
 
 // Modal functions
+// FIX THIS JS FUNCTION
 function showModal(title, body) {
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalBody').innerHTML = body;
-    document.getElementById('modal').classList.add('show');
 }
 
 function closeModal() {
@@ -368,13 +365,13 @@ function closeModal() {
 }
 
 // Interactive stat card functions
+// FIX THIS JS FUNCTION
 function showStudentList() {
     let studentListHTML = '<ul class="modal-list">';
     dashboardData.students.forEach(student => {
         studentListHTML += `
             <li>
                 <span><strong>${student.name}</strong> - Grade: ${student.grade}</span>
-                <span>Attendance: ${student.attendance}%</span>
             </li>
         `;
     });
@@ -418,11 +415,11 @@ function showSubmissionDetails() {
     showModal('Submission Details', details);
 }
 
+// FIX THIS JS FUNCTION
 function showGradeBreakdown() {
     const breakdown = `
         <p><strong>Class Average:</strong> 85.4</p>
         <p><strong>Highest Grade:</strong> 98</p>
-        <p><strong>Lowest Grade:</strong> 72</p>
         <p><strong>Median Grade:</strong> 86</p>
         <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e5e7eb;">
         <p><strong>Grade Distribution:</strong></p>
@@ -505,9 +502,9 @@ window.onclick = function(event) {
 }
 
 // Initialize dashboard
+// FIX THIS JS FUNCTION
 function initDashboard() {
     updateStats();
-    populateRecentSubmissions();
     populateUpcomingDeadlines();
     initCharts();
     
